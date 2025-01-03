@@ -12,47 +12,40 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
+      
+      - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-
-      - name: List files
-        run: ls -la
-
-      - name: Install Dependencies
-        run: |
-          npm install
-          echo "Dependencies installed"
-          npm list --depth=0
-
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+      
       - name: Build
-        run: |
-          echo "Starting build"
-          npm run build
-          echo "Build completed"
-          ls -la dist/
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
+        run: npm run build
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: './dist'
+          path: ./dist
 
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
