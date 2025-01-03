@@ -18,7 +18,6 @@ const DialogueExtractor = () => {
         const processObject = (obj, path = '') => {
           if (!obj || typeof obj !== 'object') return;
 
-          // Handle the fieldInstances structure
           if (Array.isArray(obj.fieldInstances)) {
             obj.fieldInstances.forEach(field => {
               if (
@@ -38,7 +37,6 @@ const DialogueExtractor = () => {
             });
           }
 
-          // Handle the original structure
           for (const [key, value] of Object.entries(obj)) {
             const newPath = path ? `${path}.${key}` : key;
             
@@ -135,11 +133,11 @@ const DialogueExtractor = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-card rounded-lg shadow-lg p-6">
+    <div className="w-full max-w-4xl mx-auto bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6">
       <div className="space-y-6">
         <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-bold text-foreground">Dialogue Extractor</h2>
-          <label htmlFor="jsonFile" className="text-sm font-medium text-foreground">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Dialogue Extractor</h2>
+          <label htmlFor="jsonFile" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             Upload JSON File (up to 100MB)
           </label>
           <input
@@ -147,7 +145,7 @@ const DialogueExtractor = () => {
             type="file"
             accept=".json"
             onChange={handleFileUpload}
-            className="border border-input rounded-md p-2 bg-background text-foreground"
+            className="border border-slate-300 dark:border-slate-600 rounded-md p-2 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
             disabled={isProcessing}
           />
         </div>
@@ -160,9 +158,9 @@ const DialogueExtractor = () => {
         )}
         
         {isProcessing && (
-          <div className="w-full bg-secondary rounded-full h-2.5">
+          <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
             <div 
-              className="bg-primary h-2.5 rounded-full transition-all duration-300" 
+              className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" 
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -170,11 +168,11 @@ const DialogueExtractor = () => {
         
         {dialogues.length > 0 && (
           <div 
-            className="mt-6 max-h-96 overflow-y-auto rounded-md border border-border"
+            className="mt-6 max-h-96 overflow-y-auto rounded-md border border-slate-200 dark:border-slate-600"
             onScroll={handleScroll}
           >
-            <div className="flex justify-between items-center p-4 border-b border-border bg-card">
-              <h3 className="text-lg font-semibold text-foreground">
+            <div className="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                 Found Dialogues: {dialogues.length}
               </h3>
               <button
@@ -195,7 +193,7 @@ const DialogueExtractor = () => {
                   link.click();
                   document.body.removeChild(link);
                 }}
-                className="inline-flex items-center px-3 py-1 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className="inline-flex items-center px-3 py-1 rounded-md bg-blue-600 text-white hover:bg-blue-700 font-medium text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <Download className="h-4 w-4 mr-2" />
                 Export CSV
@@ -207,20 +205,20 @@ const DialogueExtractor = () => {
                 .map((dialogue, index) => (
                   <div 
                     key={visibleRange.start + index} 
-                    className="border border-border rounded-lg p-4 bg-card/50"
+                    className="border border-slate-200 dark:border-slate-600 rounded-lg p-4 bg-white dark:bg-slate-800"
                   >
                     {dialogue.metadata?.name && (
-                      <div className="text-sm text-primary mb-1">
+                      <div className="text-sm text-blue-600 dark:text-blue-400 mb-1">
                         Character: {dialogue.metadata.name}
                       </div>
                     )}
-                    <div className="text-sm text-muted-foreground mb-1">
+                    <div className="text-sm text-slate-600 dark:text-slate-400 mb-1">
                       Type: {dialogue.type}
                     </div>
-                    <div className="text-sm text-muted-foreground mb-2">
+                    <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">
                       Path: {dialogue.path}
                     </div>
-                    <div className="whitespace-pre-wrap text-foreground">
+                    <div className="whitespace-pre-wrap text-slate-900 dark:text-white">
                       {dialogue.content}
                     </div>
                   </div>
