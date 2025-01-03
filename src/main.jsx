@@ -3,19 +3,17 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-const rootElement = document.getElementById('root');
-
-if (!rootElement) {
-  console.error('Root element not found');
-} else {
-  try {
-    ReactDOM.createRoot(rootElement).render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-    console.log('App rendered successfully');
-  } catch (error) {
-    console.error('Error rendering app:', error);
+try {
+  const root = document.getElementById('root')
+  if (!root) {
+    throw new Error('Root element not found')
   }
+  
+  ReactDOM.createRoot(root).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  )
+} catch (error) {
+  console.error('Failed to render app:', error)
 }
