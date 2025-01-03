@@ -19,7 +19,6 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       return <div className="p-4 text-red-500">Something went wrong. Please check the console for details.</div>;
     }
-
     return this.props.children;
   }
 }
@@ -27,8 +26,10 @@ class ErrorBoundary extends React.Component {
 function App() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
-        <DialogueExtractor />
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+        <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+          <DialogueExtractor />
+        </div>
       </div>
     </ErrorBoundary>
   );
