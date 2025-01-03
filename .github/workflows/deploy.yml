@@ -29,11 +29,21 @@ jobs:
         with:
           node-version: '18'
 
+      - name: List files
+        run: ls -la
+
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          echo "Dependencies installed"
+          npm list --depth=0
 
       - name: Build
-        run: npm run build
+        run: |
+          echo "Starting build"
+          npm run build
+          echo "Build completed"
+          ls -la dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
