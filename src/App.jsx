@@ -1,5 +1,6 @@
 import React from 'react';
 import DialogueExtractor from './components/DialogueExtractor';
+import './styles.css';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <div className="p-4 text-red-500">Something went wrong. Please check the console for details.</div>;
+      return <div className="error">Something went wrong. Please check the console for details.</div>;
     }
     return this.props.children;
   }
@@ -26,7 +27,7 @@ class ErrorBoundary extends React.Component {
 function App() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gray-100 py-8 px-4">
+      <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
         <DialogueExtractor />
       </div>
     </ErrorBoundary>
