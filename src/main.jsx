@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import './index.css'
+import './styles.css'
 
 try {
   const root = document.getElementById('root')
@@ -14,6 +14,7 @@ try {
       <App />
     </React.StrictMode>
   )
+  console.log('App mounted successfully')
 } catch (error) {
   console.error('Failed to render app:', error)
 }
