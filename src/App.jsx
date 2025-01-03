@@ -26,10 +26,8 @@ class ErrorBoundary extends React.Component {
 function App() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-          <DialogueExtractor />
-        </div>
+      <div className="min-h-screen bg-gray-100 py-8 px-4">
+        <DialogueExtractor />
       </div>
     </ErrorBoundary>
   );
